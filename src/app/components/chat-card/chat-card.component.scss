@@ -1,0 +1,30 @@
+.chat-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(180, 120, 255, 0.08);
+  padding: 28px 24px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  &:hover {
+    box-shadow: 0 6px 24px rgba(180, 120, 255, 0.18);
+  }
+  .card-icon {
+    font-size: 2.2rem;
+    color: #b478ff;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+  }
+  .card-desc {
+    font-size: 0.95rem;
+    color: #888;
+  }
+}

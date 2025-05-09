@@ -1,0 +1,85 @@
+.chat-input-container {
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .chat-input {
+    width: 60%;
+
+    ::ng-deep {
+      .mat-mdc-form-field-flex {
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 2px 12px rgba(180, 120, 255, 0.08);
+      }
+
+      .mat-mdc-input-element {
+        padding: 12px 16px;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  .community-link {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: #bbb;
+    a {
+      color: #b478ff;
+      margin-left: 4px;
+      text-decoration: underline;
+    }
+  }
+}
+
+.custom-input-container {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 2px 12px rgba(180, 120, 255, 0.08);
+  padding: 0 16px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.custom-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  font-size: 1.1rem;
+  padding: 16px 0;
+  color: #222;
+}
+
+.custom-input::placeholder {
+  color: #bbb;
+  opacity: 1;
+}
+
+.send-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #b478ff;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.community-link {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #bbb;
+  text-align: center;
+}
+
+.community-link a {
+  color: #b478ff;
+  margin-left: 4px;
+  text-decoration: underline;
+}

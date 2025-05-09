@@ -1,0 +1,26 @@
+<div class="main-content">
+  <h1>Hello <span class="highlight">Marcus</span></h1>
+  <h2>How can i help you today?</h2>
+  <div class="card-row">
+    <app-chat-card
+      title="What's Happen in 24 hours?"
+      description="See what's been happening in the world over the last 24 hours"
+    ></app-chat-card>
+    <app-chat-card
+      title="Stock market update"
+      description="See what's happening in the stock market in real time"
+    ></app-chat-card>
+    <app-chat-card
+      title="Deep economic research"
+      description="See research from experts that we have simplified"
+    ></app-chat-card>
+  </div>
+
+  <div class="chat-messages">
+    <div *ngFor="let msg of messages" [ngClass]="msg.sender">
+      <div class="bubble">{{ msg.text }}</div>
+    </div>
+  </div>
+
+  <app-chat-input (send)="sendMessage($event)"></app-chat-input>
+</div>

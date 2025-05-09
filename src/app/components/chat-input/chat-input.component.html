@@ -1,0 +1,12 @@
+<div style="margin-top: 23rem" class="custom-input-container">
+  <input
+    type="text"
+    placeholder="Ask something..."
+    [(ngModel)]="message"
+    class="custom-input"
+    (keydown.enter)="onSend()"
+  />
+  <button class="send-btn" (click)="onSend()">
+    <mat-icon>send</mat-icon>
+  </button>
+</div>

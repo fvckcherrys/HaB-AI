@@ -1,0 +1,57 @@
+.main-content {
+  margin-top: 80px;
+  text-align: center;
+  padding-bottom: 120px;
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #b478ff;
+    .highlight {
+      color: #b478ff;
+    }
+  }
+  h2 {
+    font-size: 1.5rem;
+    color: #bbb;
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+  .card-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+  }
+}
+
+.chat-messages {
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user .bubble {
+  align-self: flex-end;
+  background: white;
+  color: #222;
+  border-radius: 18px 18px 4px 18px;
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(180, 120, 255, 0.06);
+  max-width: 80%;
+  margin-left: auto;
+  width: fit-content;
+}
+
+.ai .bubble {
+  align-self: flex-start;
+  background: #b478ff;
+  color: #fff;
+  border-radius: 18px 18px 18px 4px;
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(180, 120, 255, 0.06);
+  max-width: 80%;
+  margin-right: auto;
+  width: fit-content;
+}

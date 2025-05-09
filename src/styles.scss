@@ -1,1 +1,81 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+  font-family: "Inter", "Roboto", Arial, sans-serif;
+  background: linear-gradient(120deg, #f8e1ff 0%, #e3f0ff 100%);
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Custom Material Form Field Styles
+.mat-mdc-form-field {
+  width: 100%;
+
+  // Customize the form field appearance
+  .mat-mdc-form-field-flex {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 0 12px;
+  }
+
+  // Remove the outline/border
+  .mat-mdc-form-field-outline {
+    display: none;
+  }
+
+  // Customize the label
+  .mat-mdc-form-field-label {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  // Customize the input text
+  .mat-mdc-input-element {
+    color: rgba(0, 0, 0, 0.87);
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Customize the icon
+  .mat-mdc-form-field-icon-suffix {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  // Hover state
+  &:hover {
+    .mat-mdc-form-field-flex {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  // Focus state
+  &.mat-focused {
+    .mat-mdc-form-field-flex {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// Custom styles for specific form fields
+.chat-input {
+  .mat-mdc-form-field-flex {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+  }
+}
+
+.search-bar {
+  .mat-mdc-form-field-flex {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+  }
+}
