@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  isLoggedIn = false;
   username: string = '';
   password: string = '';
 
@@ -19,6 +20,12 @@ export class LoginComponent {
   onSubmit() {
     // TODO: Implement actual authentication
     if (this.username && this.password) {
+      this.isLoggedIn = true;
+      const user = {
+        username: this.username,
+        password: this.password,
+      };
+      sessionStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['/home']);
     }
   }

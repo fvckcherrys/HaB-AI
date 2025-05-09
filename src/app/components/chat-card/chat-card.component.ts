@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -12,4 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 export class ChatCardComponent {
   @Input() title: string = '';
   @Input() description: string = '';
+  @Output() click = new EventEmitter<any>();
+
+  onClick(event: any) {
+    this.click.emit(this.title);
+    event.stopPropagation();
+  }
 }

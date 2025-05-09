@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChatCardComponent } from '../chat-card/chat-card.component';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { CommonModule, NgClass, NgFor } from '@angular/common';
+import { ChatService } from '../../services/chat.service';
+import { firstValueFrom } from 'rxjs';
 
 interface ChatMessage {
   text: string;
@@ -15,16 +17,25 @@ interface ChatMessage {
   standalone: true,
   imports: [ChatCardComponent, ChatInputComponent, CommonModule],
 })
-export class MainContentComponent {
+export class MainContentComponent implements OnInit {
   messages: ChatMessage[] = [];
+  userInfo: any;
 
-  sendMessage(message: string) {
+  constructor(private chatService: ChatService) {}
+
+  ngOnInit() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('user') || '{}');
+  }
+
+  onCardClick(message: string) {
+    this.sendMessage(message);
+  }
+
+  async sendMessage(message: string) {
     this.messages.push({ text: message, sender: 'user' });
-    setTimeout(() => {
-      this.messages.push({
-        text: 'This is a simulated AI response to: ' + message,
-        sender: 'ai',
-      });
-    }, 1000);
+    const data = await firstValueFrom(
+      this.chatService.sendMessage({ message: message })
+    );
+    this.messages.push({ text: data.response, sender: 'ai' });
   }
 }

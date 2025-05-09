@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -9,4 +9,11 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [MatIconModule, MatButtonModule],
 })
-export class UserProfileComponent {}
+export class UserProfileComponent implements OnInit {
+  userInfo: any;
+
+  ngOnInit() {
+    this.userInfo = JSON.parse(sessionStorage.getItem('user') || '{}');
+  }
+  constructor() {}
+}
