@@ -4,10 +4,12 @@ import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { ChatService } from '../../services/chat.service';
 import { firstValueFrom } from 'rxjs';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 interface ChatMessage {
-  text: string;
+  text: string | SafeHtml;
   sender: 'user' | 'ai';
+  isHtml?: boolean;
 }
 
 @Component({
@@ -21,14 +23,36 @@ export class MainContentComponent implements OnInit {
   messages: ChatMessage[] = [];
   userInfo: any;
 
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.userInfo = JSON.parse(sessionStorage.getItem('user') || '{}');
+    if (this.userInfo.username) {
+      this.userInfo.username = this.capitalizeFirstLetter(
+        this.userInfo.username
+      );
+    }
+  }
+
+  private capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   onCardClick(message: string) {
     this.sendMessage(message);
+  }
+
+  private makeLinksClickable(text: string): SafeHtml {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const html = text.replace(
+      urlRegex,
+      (url) =>
+        `<a href="${url}" target="_blank" style="color: inherit; text-decoration: underline;">${url}</a>`
+    );
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   async sendMessage(message: string) {
@@ -36,6 +60,15 @@ export class MainContentComponent implements OnInit {
     const data = await firstValueFrom(
       this.chatService.sendMessage({ message: message })
     );
-    this.messages.push({ text: data.response, sender: 'ai' });
+
+    if (data.link) {
+      this.messages.push({
+        text: this.makeLinksClickable(data.response),
+        sender: 'ai',
+        isHtml: true,
+      });
+    } else {
+      this.messages.push({ text: data.response, sender: 'ai', isHtml: false });
+    }
   }
 }
