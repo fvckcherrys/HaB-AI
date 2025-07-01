@@ -11,14 +11,10 @@
     />
     <mat-icon class="search-icon">search</mat-icon>
   </div>
-  <nav class="nav-links">
-    <a mat-button>Explore</a>
-    <a mat-button>Library</a>
-    <a mat-button>Files</a>
-    <a mat-button>History</a>
-  </nav>
   <div class="recent-chats">
     <div class="recent-title">RECENT CHATS</div>
-    <div class="chat-item">Brainstorming small busine...</div>
+    <div class="chat-item" *ngFor="let chat of recentChats">
+      {{ chat.title }}
+    </div>
   </div>
 </div>

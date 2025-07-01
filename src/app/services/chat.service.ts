@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment as env } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,17 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   sendMessage(message: any): Observable<any> {
-    return this.http.post('http://fz.n26n.com/api/send', message, this.options);
+    let url = `${env.baseUrl}chat/message`;
+    return this.http.post(url, message, this.options);
+  }
+
+  getChatHistory(sessionId: number): Observable<any> {
+    let url = `${env.baseUrl}chat/history/${sessionId}`;
+    return this.http.get(url, this.options);
+  }
+
+  getRecentChats(): Observable<any> {
+    let url = `${env.baseUrl}chat/conversations`;
+    return this.http.get(url, this.options);
   }
 }

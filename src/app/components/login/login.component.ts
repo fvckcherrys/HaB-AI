@@ -1,32 +1,58 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   isLoggedIn = false;
-  username: string = '';
-  password: string = '';
+  loginForm: FormGroup;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
 
   onSubmit() {
-    // TODO: Implement actual authentication
-    if (this.username && this.password) {
+    if (this.loginForm.valid) {
       this.isLoggedIn = true;
       const user = {
-        username: this.username,
-        password: this.password,
+        username: this.email?.value,
+        password: this.password?.value,
       };
-      sessionStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['/home']);
+      this.loginService.login(user).subscribe((res) => {
+        console.log(res);
+        sessionStorage.setItem('user', JSON.stringify(res));
+        this.router.navigate(['/home']);
+      });
+    } else {
+      this.loginForm.markAllAsTouched();
     }
   }
 }
